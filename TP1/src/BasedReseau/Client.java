@@ -10,9 +10,10 @@ import java.util.Scanner;
 
 public class Client {
     private String address;
-    private Socket server = null;
+    private Socket server;
     private DataOutputStream out;
     private DataInputStream in;
+    private DataInputStream Cin;
 
     public Client(String address, int port) throws IOException {
         server = new Socket(address,port);
@@ -20,16 +21,19 @@ public class Client {
 
         in = new DataInputStream(System.in);
 
+        Cin = new DataInputStream(server.getInputStream());
         out = new DataOutputStream(server.getOutputStream());
 
         String line= "";
+        String ServLine = "";
 
         Scanner scan = new Scanner(in);
 
         while(!line.equals("Fini")){
             try{
-                line =  scan.nextLine();
+                line = scan.nextLine();
                 out.writeUTF(line);
+                ServLine = Cin.readUTF();
             }
             catch(IOException e){
                 System.out.println(e);
