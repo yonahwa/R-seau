@@ -34,6 +34,7 @@ public class Client {
                 line = scan.nextLine();
                 out.writeUTF(line);
                 ServLine = Cin.readUTF();
+                System.out.println(ServLine);
             }
             catch(IOException e){
                 System.out.println(e);
